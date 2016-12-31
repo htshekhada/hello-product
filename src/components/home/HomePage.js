@@ -5,9 +5,12 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="jumbotron">
-        <h1>Cat Book</h1>
-        <p>the best way manage your cat collection.</p>
-        <Link to="login" className="btn btn-primary btn-lg">log in as a test user</Link>
+      Product List: 
+        <ul className="user-list">
+          <li>product-a</li>
+          <li>product-b</li>
+          <li>product-c</li>
+        </ul>
       </div>
     );
   }
