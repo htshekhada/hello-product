@@ -10,7 +10,7 @@ class App extends Component {
         <div className="App-header">
           <Link to="/product-list">Product List</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Link to="/new-product">New Product</Link>
+          <Link to="/add-product">New Product</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/about">About</Link>
 

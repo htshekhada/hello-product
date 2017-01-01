@@ -15,12 +15,25 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     console.log('componentDidMount is called');
-    productsApi.getAllProducts()
-      .then(res => {
-        //const products = res.map(obj => obj.data);
-        this.setState({ products: res });
-        console.log(this.state.products.length);
-      });
+    let products = productsApi.getAllProducts();
+    this.setState({ products: products });
+    let myProd = {
+      "id": 4,
+      "code": "prd004",
+      "name": "Mouse",
+      "description": "Mouse for desktop PC",
+      "category": "electronics",
+      "sub-category": "computer",
+      "rate": 3,
+      "active": true
+    };
+
+    // productsApi.getAllProducts()
+    //   .then(res => {
+    //     //const products = res.map(obj => obj.data);
+    //     this.setState({ products: res });
+    //     console.log(this.state.products.length);
+    //   });
   }
 
   render() {
