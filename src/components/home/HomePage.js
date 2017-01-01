@@ -1,15 +1,36 @@
 import React from 'react';
 import {Link} from 'react-router';
+import productsApi from '../../api/ProductsApi';
 
 class HomePage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    console.log('HomePage constructor is called...');
+    this.state = {
+      products: []
+    };
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount is called');
+    productsApi.getAllProducts()
+      .then(res => {
+        //const products = res.map(obj => obj.data);
+        this.setState({ products: res });
+        console.log(this.state.products.length);
+      });
+  }
+
   render() {
     return (
       <div className="jumbotron">
-      Product List: 
-        <ul className="user-list">
-          <li>product-a</li>
-          <li>product-b</li>
-          <li>product-c</li>
+      Product List: {this.state.products.length}
+      <ul>
+          {this.state.products.map(product =>
+            <li key={product.id}>{product.name}</li>
+          )}
         </ul>
       </div>
     );

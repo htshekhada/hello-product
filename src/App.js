@@ -8,7 +8,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <Link to="/product-list">Product List</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/new-product">New Product</Link>
@@ -27,3 +26,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+//<img src={logo} className="App-logo" alt="logo" />

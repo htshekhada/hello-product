@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "code": "prd001",
+      "name": "Medium t-shirt",
+      "description": "A Medium t-shirt",
+      "category": "cloth",
+      "sub-category": "t-shirt",
+      "rate": 4,
+      "active": true
+    }, {
+      "id": 2,
+      "code": "prd002",
+      "name": "Medium Trouser",
+      "description": "A Medium trouser",
+      "category": "cloth",
+      "sub-category": "trouser",
+      "rate": 3,
+      "active": true
+    }, {
+      "id": 3,
+      "code": "prd003",
+      "name": "keyboard",
+      "description": "keyboard for desktop PC",
+      "category": "electronics",
+      "sub-category": "computer",
+      "rate": 3,
+      "active": true
+    }
+]
