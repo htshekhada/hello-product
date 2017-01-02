@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Router, Route, Link} from 'react-router';
+import {Link} from 'react-router';
 
 class App extends Component {
   render() {

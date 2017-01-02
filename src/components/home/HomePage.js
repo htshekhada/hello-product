@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import productsApi from '../../api/ProductsApi';
 
 class HomePage extends React.Component {
@@ -17,16 +16,6 @@ class HomePage extends React.Component {
     console.log('componentDidMount is called');
     let products = productsApi.getAllProducts();
     this.setState({ products: products });
-    let myProd = {
-      "id": 4,
-      "code": "prd004",
-      "name": "Mouse",
-      "description": "Mouse for desktop PC",
-      "category": "electronics",
-      "sub-category": "computer",
-      "rate": 3,
-      "active": true
-    };
 
     // productsApi.getAllProducts()
     //   .then(res => {

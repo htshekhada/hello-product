@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import AboutPage from './components/about/AboutPage';
 import HomePage from './components/home/HomePage';
 import AddProduct from './components/product/AddProduct';

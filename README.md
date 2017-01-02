@@ -1,10 +1,10 @@
 How to run?
 
-npm install
+npm install<br>
 npm start
 
 <hr/>
-Pages:
+Pages:<br>
 	- Product List page
 		- Delete Product
 		- Infinite Scrolling (If possible)
@@ -31,7 +31,12 @@ Notes:
 	- Push code to GitHub
 	- Add README.md with require details
 
-
+<hr/>
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 <br>
 You can find the most recent version of "create-react-app" guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+Search filter: https://scotch.io/tutorials/learning-react-getting-started-and-concepts
+Pure react forms: http://jamesknelson.com/learn-raw-react-ridiculously-simple-forms/
+Redux example with "create-react-app": https://github.com/reactjs/redux/tree/master/examples/todos
+React custom controls: https://github.com/enaqx/awesome-react
