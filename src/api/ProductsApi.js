@@ -8,7 +8,7 @@ class ProductsApi {
       "description": "A Medium t-shirt",
       "category": "cloth",
       "sub-category": "t-shirt",
-      "rate": 4,
+      "rate": 10,
       "active": true
     }, {
       "id": 2,
@@ -17,7 +17,7 @@ class ProductsApi {
       "description": "A Medium trouser",
       "category": "cloth",
       "sub-category": "trouser",
-      "rate": 3,
+      "rate": 20,
       "active": true
     }, {
       "id": 3,
@@ -26,10 +26,48 @@ class ProductsApi {
       "description": "keyboard for desktop PC",
       "category": "electronics",
       "sub-category": "computer",
-      "rate": 3,
+      "rate": 30,
       "active": true
     }
 ];
+
+  static categories = [
+    {
+      "id": 1,
+      "name": "cloth",
+      "level": 1,
+      "parent_id": 0
+    },
+    {
+      "id": 101,
+      "name": "t-shirt",
+      "level": 2,
+      "parent_id": 1
+    },
+    {
+      "id": 102,
+      "name": "trouser",
+      "level": 2,
+      "parent_id": 1
+    },
+    {
+      "id": 2,
+      "name": "electronics",
+      "level": 1,
+      "parent_id": 0
+    },
+    {
+      "id": 103,
+      "name": "computer",
+      "level": 2,
+      "parent_id": 2
+    }
+  ];
+
+  static getCategories(level, parentId) {
+    let parentIdInt = parseInt(parentId);
+    return this.categories.filter(category => (category.level === level && category.parent_id === parentIdInt));
+  }
 
   static getAllProducts() {
 
