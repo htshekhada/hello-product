@@ -4,7 +4,7 @@ import productsApi from '../../api/ProductsApi';
 class AboutPage extends React.Component {
 
   componentDidMount() {
-    productsApi.createProduct();
+    //productsApi.createProduct();
   }
   render() {
     return (

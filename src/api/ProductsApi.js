@@ -95,17 +95,7 @@ class ProductsApi {
     });
   }
 
-  static createProduct() {
-    let myProd = {
-      "id": 4,
-      "code": "prd004",
-      "name": "Mouse",
-      "description": "Mouse for desktop PC",
-      "category": "electronics",
-      "sub-category": "computer",
-      "rate": 3,
-      "active": true
-    };
+  static createProduct(myProd) {
     this.products.push(myProd);
   }
 

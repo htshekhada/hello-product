@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import { combineForms } from 'react-redux-form';
 // import { Form, Control } from 'react-redux-form';
 import productsApi from '../../api/ProductsApi';
+import { browserHistory, router } from 'react-router'
 
 const initialProduct = {
       "id": -1,
@@ -52,8 +53,24 @@ class AddProduct extends React.Component {
     console.log(productCodeInput.value+', '+productNameInput.value+', '+productDescriptionInput.value+', '
                   +categoryInput.value+', '+subCategoryInput.value+', '+productRateInput.value+', '
                     +productActiveInput.value+'('+this.state.productActive+')');
-    //validate form input
+    //TODO validate form input
+
+    //after successful AddProduct, navigate to product-list
+    let newProduct = {
+      "id": new Date().valueOf(),
+      "code": productCodeInput.value,
+      "name": productNameInput.value,
+      "description": productDescriptionInput.value,
+      "category": categoryInput.value,
+      "sub-category": subCategoryInput.value,
+      "rate": productRateInput.value,
+      "active": this.state.productActive
+    };
     
+    browserHistory.push('/#/product-list');
+    //this.context.router.push('/product-list');
+    //router.push('/product-list');
+
   }
 
   onCategorySelected(e) {
