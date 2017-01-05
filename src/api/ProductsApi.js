@@ -70,13 +70,17 @@ class ProductsApi {
   }
 
   static getAllProducts() {
-
     return this.products;
-    // return fetch("products.json").then(response => {
-    //   return response.json()
-    // }).catch(error => {
-    //   return error;
-    // });
+  }
+
+  static getProduct(productId) {
+    let productIdInt = parseInt(productId);
+    let product = this.products.filter(product => (product.id === productIdInt));
+    if(product.length === 0) {
+      return null;
+    } else {
+      return product[0];
+    }
   }
 
   static updateCat(cat) {

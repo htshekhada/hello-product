@@ -11,7 +11,7 @@ class App extends Component {
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/product-list">Product List</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Link to="/add-product">New Product</Link>
+          <Link to="/add-product/2">New Product</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/about">About</Link>
 

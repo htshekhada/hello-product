@@ -11,7 +11,7 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <Route path="product-list" component={HomePage} />
-      <Route path="add-product" component={AddProduct} />
+      <Route path="add-product(/:productId)" component={AddProduct} />
       <Route path="about" component={AboutPage} />
     </Route>
   </Router>,

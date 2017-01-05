@@ -17,15 +17,18 @@ const initialProduct = {
       "active": true
 };
 
-const store = createStore(combineForms({
-  product: initialProduct,
-}));
-
 class AddProduct extends React.Component {
+
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.object.isRequired,
+    };
+  }
 
   constructor(props) {
     super(props);
     this.state = {
+      productToEdit: {},
       categories: [],
       subCategories: [],
       productActive: false
@@ -33,11 +36,20 @@ class AddProduct extends React.Component {
      
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onCategorySelected = this.onCategorySelected.bind(this);
+
   }   
 
   componentDidMount() {
     let categories = productsApi.getCategories(1,0);
     this.setState({ categories: categories });
+    if(this.props.params.productId && this.props.params.productId !== "") {
+        let product = productsApi.getProduct(this.props.params.productId);
+        if(product !== null) {
+        this.setState({ productToEdit: product });
+    } else {
+        this.setState({ productToEdit: initialProduct });
+      }
+    }
 
   }
 
@@ -66,10 +78,10 @@ class AddProduct extends React.Component {
       "rate": productRateInput.value,
       "active": this.state.productActive
     };
-    
-    browserHistory.push('/#/product-list');
-    //this.context.router.push('/product-list');
-    //router.push('/product-list');
+
+    productsApi.createProduct(newProduct);
+    //browserHistory.push('/#/product-list');
+    this.context.router.push('/product-list');
 
   }
 
@@ -92,7 +104,7 @@ class AddProduct extends React.Component {
       <form onSubmit={ this.handleSubmit }>
         <table>
           <tbody>
-          <tr><td><input placeholder="Code" ref="product_code" /></td></tr>
+          <tr><td><input placeholder="Code" ref="product_code" value={this.state.productToEdit["code"]}/></td></tr>
           <tr><td><input placeholder="Name" ref="product_name" /></td></tr>
           <tr><td><input placeholder="Description" ref="product_description" /></td></tr>
           <tr><td><select ref="category" defaultValue="-1" placeholder="Category" onChange={this.onCategorySelected} required>
