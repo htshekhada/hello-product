@@ -41,6 +41,7 @@ class ProductTable extends React.Component {
             <th>Sub-category</th>
             <th>Rate</th>
             <th>Active?</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>

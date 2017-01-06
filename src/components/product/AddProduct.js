@@ -28,13 +28,15 @@ class AddProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productToEdit: {},
+      productToEdit: initialProduct,
       categories: [],
       subCategories: [],
-      productActive: false
+      productActive: false,
+      code: ''
     };
      
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onCategorySelected = this.onCategorySelected.bind(this);
 
   }   
@@ -46,6 +48,7 @@ class AddProduct extends React.Component {
         let product = productsApi.getProduct(this.props.params.productId);
         if(product !== null) {
         this.setState({ productToEdit: product });
+        this.setState({ code: product.code });
     } else {
         this.setState({ productToEdit: initialProduct });
       }
@@ -99,15 +102,23 @@ class AddProduct extends React.Component {
     });
   }
 
+  handleChange(e) {
+    var newState = {productToEdit:{}}; 
+    newState.productToEdit[e.target.name] = e.target.value; 
+//    this.state.productToEdit.code=e.target.value;
+    //this.setState({code: e.target.value});
+    this.setState(newState);
+  }
+
   render() {
     return (
       <form onSubmit={ this.handleSubmit }>
         <table>
           <tbody>
-          <tr><td><input placeholder="Code" ref="product_code" value={this.state.productToEdit["code"]}/></td></tr>
-          <tr><td><input placeholder="Name" ref="product_name" /></td></tr>
-          <tr><td><input placeholder="Description" ref="product_description" /></td></tr>
-          <tr><td><select ref="category" defaultValue="-1" placeholder="Category" onChange={this.onCategorySelected} required>
+          <tr><td><input name="code" placeholder="Code" ref="product_code" value={this.state.productToEdit.code} onChange={this.handleChange}/></td></tr>
+          <tr><td><input name="name" placeholder="Name" ref="product_name" value={this.state.productToEdit.name} onChange={this.handleChange}/></td></tr>
+          <tr><td><input name="description" placeholder="Description" ref="product_description" value={this.state.productToEdit.description} onChange={this.handleChange}/></td></tr>
+          <tr><td><select name="category" ref="category" value={this.state.productToEdit.category} placeholder="Category" onChange={this.onCategorySelected} required>
             <option value="-1">-Category-</option>
             {
               this.state.categories.map(function(category) {

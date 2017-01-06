@@ -6,7 +6,7 @@ class ProductsApi {
       "code": "prd001",
       "name": "Medium t-shirt",
       "description": "A Medium t-shirt",
-      "category": "cloth",
+      "category": 1,
       "sub-category": "t-shirt",
       "rate": 10,
       "active": true
@@ -15,7 +15,7 @@ class ProductsApi {
       "code": "prd002",
       "name": "Medium Trouser",
       "description": "A Medium trouser",
-      "category": "cloth",
+      "category": 1,
       "sub-category": "trouser",
       "rate": 20,
       "active": true
@@ -24,7 +24,7 @@ class ProductsApi {
       "code": "prd003",
       "name": "keyboard",
       "description": "keyboard for desktop PC",
-      "category": "electronics",
+      "category": 2,
       "sub-category": "computer",
       "rate": 30,
       "active": true
