@@ -1,5 +1,5 @@
 import React from 'react';
-import productsApi from '../../api/ProductsApi';
+// import productsApi from '../../api/ProductsApi';
 
 class AboutPage extends React.Component {
 
