@@ -12,16 +12,19 @@ class ProductTable extends React.Component {
   }
 
   componentWillMount() {
+    let rows = []
+    this.props.products.forEach((product) => {
+        rows.push(<ProductRow product={product} key={product.id} />);
+    });
+    this.setState({ rows: rows });      
   }
 
   componentWillReceiveProps(next) {
     console.log('componentWillReceiveProps');
     let rows = []
-
     next.products.forEach((product) => {
         rows.push(<ProductRow product={product} key={product.id} />);
     });
-    
     this.setState({ rows: rows });
   }
 
@@ -31,8 +34,13 @@ class ProductTable extends React.Component {
       <table>
         <thead>
           <tr>
+            <th>Product Code</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Sub-category</th>
+            <th>Rate</th>
+            <th>Active?</th>
           </tr>
         </thead>
         <tbody>

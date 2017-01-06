@@ -31,7 +31,11 @@ class FilterableProductTable extends React.Component {
       isActiveOnly: isActiveOnly
     });
 
-    let productsFiltered = this.state.products.filter(product => (product.name.indexOf(filterText) !== -1));
+    let productsFiltered = this.state.products.filter(product => {
+        if(product.name.indexOf(filterText) !== -1 && (product.active || !isActiveOnly)) {
+            return product;
+        }
+    });
 
     // let products = productsApi.getAllProducts();
     this.setState({ productsFiltered: productsFiltered });    

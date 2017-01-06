@@ -14,8 +14,13 @@ class ProductRow extends React.Component {
       </span>
     return (
       <tr>
+        <td>{this.props.product.code}</td>
         <td>{name}</td>
+        <td>{this.props.product.description}</td>
+        <td>{this.props.product.category}</td>
+        <td>{this.props.product["sub-category"]}</td>
         <td>{this.props.product.rate}</td>
+        <td>{this.props.product.active}</td>
       </tr>
     )
   }
