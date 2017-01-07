@@ -7,7 +7,7 @@ class ProductsApi {
       "name": "Medium t-shirt",
       "description": "A Medium t-shirt",
       "category": 1,
-      "sub-category": "t-shirt",
+      "sub-category": 101,
       "rate": 10,
       "active": true
     }, {
@@ -16,7 +16,7 @@ class ProductsApi {
       "name": "Medium Trouser",
       "description": "A Medium trouser",
       "category": 1,
-      "sub-category": "trouser",
+      "sub-category": 102,
       "rate": 20,
       "active": true
     }, {
@@ -25,7 +25,7 @@ class ProductsApi {
       "name": "keyboard",
       "description": "keyboard for desktop PC",
       "category": 2,
-      "sub-category": "computer",
+      "sub-category": 103,
       "rate": 30,
       "active": true
     }

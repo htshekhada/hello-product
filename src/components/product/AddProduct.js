@@ -47,8 +47,9 @@ class AddProduct extends React.Component {
     if(this.props.params.productId && this.props.params.productId !== "") {
         let product = productsApi.getProduct(this.props.params.productId);
         if(product !== null) {
+        let subCategories = productsApi.getCategories(2,product.category);
+        this.setState({ subCategories: subCategories });
         this.setState({ productToEdit: product });
-        this.setState({ code: product.code });
     } else {
         this.setState({ productToEdit: initialProduct });
       }
@@ -57,6 +58,7 @@ class AddProduct extends React.Component {
   }
 
   handleSubmit(val) {
+    val.preventDefault();
     let productCodeInput = this.refs.product_code;
     let productNameInput = this.refs.product_name;
     let productDescriptionInput = this.refs.product_description;
@@ -85,7 +87,7 @@ class AddProduct extends React.Component {
     productsApi.createProduct(newProduct);
     //browserHistory.push('/#/product-list');
     this.context.router.push('/product-list');
-
+    return false;
   }
 
   onCategorySelected(e) {
@@ -103,8 +105,12 @@ class AddProduct extends React.Component {
   }
 
   handleChange(e) {
-    var newState = {productToEdit:{}}; 
-    newState.productToEdit[e.target.name] = e.target.value; 
+    var newState = {productToEdit:{}};
+    if(e.target.name === "active") {
+      newState.productToEdit[e.target.name] = e.target.checked; 
+    } else {
+      newState.productToEdit[e.target.name] = e.target.value;
+    }
 //    this.state.productToEdit.code=e.target.value;
     //this.setState({code: e.target.value});
     this.setState(newState);
@@ -118,7 +124,7 @@ class AddProduct extends React.Component {
           <tr><td><input name="code" placeholder="Code" ref="product_code" value={this.state.productToEdit.code} onChange={this.handleChange}/></td></tr>
           <tr><td><input name="name" placeholder="Name" ref="product_name" value={this.state.productToEdit.name} onChange={this.handleChange}/></td></tr>
           <tr><td><input name="description" placeholder="Description" ref="product_description" value={this.state.productToEdit.description} onChange={this.handleChange}/></td></tr>
-          <tr><td><select name="category" ref="category" value={this.state.productToEdit.category} placeholder="Category" onChange={this.onCategorySelected} required>
+          <tr><td><select name="category" ref="category" value={this.state.productToEdit.category} placeholder="Category" onChange={(event)=>{this.handleChange(event); this.onCategorySelected(event)}} required>
             <option value="-1">-Category-</option>
             {
               this.state.categories.map(function(category) {
@@ -126,7 +132,7 @@ class AddProduct extends React.Component {
               })
             }
           </select></td></tr>
-          <tr><td><select ref="sub_category" defaultValue="-1" placeholder="Sub Category" required>
+          <tr><td><select name="sub-category" ref="sub_category" value={this.state.productToEdit["sub-category"]} placeholder="Sub Category" onChange={this.handleChange} required>
             <option value="-1">-Sub Category-</option>
             {
               this.state.subCategories.map(function(subCategory) {
@@ -134,8 +140,8 @@ class AddProduct extends React.Component {
               })
             }
           </select></td></tr>
-          <tr><td><input placeholder="Rate" ref="product_rate" /></td></tr>
-          <tr><td>Active: <input type="checkbox" checked={this.state.productActive} onChange={this.toggleCheckbox.bind(this)} ref="product_active" /></td></tr>
+          <tr><td><input name="rate" placeholder="Rate" ref="product_rate" /></td></tr>
+          <tr><td>Active: <input name="active" type="checkbox" checked={this.state.productToEdit.active} onChange={this.handleChange} ref="product_active" /></td></tr>
           <tr><td><button>Add Product</button></td></tr>
           </tbody>
         </table>
