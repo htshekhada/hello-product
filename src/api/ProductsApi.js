@@ -99,8 +99,22 @@ class ProductsApi {
     });
   }
 
-  static createProduct(myProd) {
-    this.products.push(myProd);
+  static createOrUpdateProduct(myProd) {
+    //new Date().valueOf()
+    if(myProd.id === -1) {
+      myProd.id = new Date().valueOf();
+      this.products.push(myProd);
+    } else {
+      let existingProd = this.getProduct(myProd.id);
+      existingProd.code = myProd.code;
+      existingProd.name = myProd.name;
+      existingProd.description = myProd.description;
+      existingProd.category = myProd.category;
+      existingProd["sub-category"] = myProd["sub-category"];
+      existingProd.rate = myProd.rate;
+      existingProd.active = myProd.active;
+    }
+    
   }
 
   static deleteCat(cat) {

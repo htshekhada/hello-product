@@ -69,23 +69,24 @@ class AddProduct extends React.Component {
 
     console.log(productCodeInput.value+', '+productNameInput.value+', '+productDescriptionInput.value+', '
                   +categoryInput.value+', '+subCategoryInput.value+', '+productRateInput.value+', '
-                    +productActiveInput.value+'('+this.state.productActive+')');
+                    +productActiveInput.checked+'('+this.state.productActive+')');
     //TODO validate form input
 
-    //after successful AddProduct, navigate to product-list
+    //after successful Add or update Product 
     let newProduct = {
-      "id": new Date().valueOf(),
+      "id": this.props.params.productId?this.props.params.productId:-1,
       "code": productCodeInput.value,
       "name": productNameInput.value,
       "description": productDescriptionInput.value,
       "category": categoryInput.value,
       "sub-category": subCategoryInput.value,
       "rate": productRateInput.value,
-      "active": this.state.productActive
+      "active": productActiveInput.checked
     };
 
-    productsApi.createProduct(newProduct);
+    productsApi.createOrUpdateProduct(newProduct);
     //browserHistory.push('/#/product-list');
+    //navigate to product-list
     this.context.router.push('/product-list');
     return false;
   }
@@ -142,7 +143,7 @@ class AddProduct extends React.Component {
           </select></td></tr>
           <tr><td><input name="rate" placeholder="Rate" ref="product_rate" /></td></tr>
           <tr><td>Active: <input name="active" type="checkbox" checked={this.state.productToEdit.active} onChange={this.handleChange} ref="product_active" /></td></tr>
-          <tr><td><button>Add Product</button></td></tr>
+          <tr><td><button>Save</button></td></tr>
           </tbody>
         </table>
       </form>
