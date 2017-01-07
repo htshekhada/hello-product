@@ -64,13 +64,23 @@ class ProductsApi {
     }
   ];
 
+  static getCategoryName(categoryId) {
+    let category = this.categories.filter(category => (category.id === categoryId));
+    if(category.length > 0) {
+      return category[0].name;
+    }
+  }
   static getCategories(level, parentId) {
     let parentIdInt = parseInt(parentId);
     return this.categories.filter(category => (category.level === level && category.parent_id === parentIdInt));
   }
 
   static getAllProducts() {
-    return this.products;
+    return fetch("products.json").then(response => {
+      return response.json();
+    });
+
+    //return this.products;
   }
 
   static getProduct(productId) {

@@ -18,8 +18,10 @@ class FilterableProductTable extends React.Component {
 
   componentWillMount() {
     console.log('componentWillMount in FilterableProductTable');
-    let products = productsApi.getAllProducts();
-    this.setState({ products: products, productsFiltered: products });
+    productsApi.getAllProducts().then(result =>
+      this.setState({ products: result, productsFiltered: result })
+    );
+    
   }
 
   componentDidMount() {

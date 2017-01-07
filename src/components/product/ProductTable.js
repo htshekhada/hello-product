@@ -31,23 +31,9 @@ class ProductTable extends React.Component {
   render() {
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Product Code</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Sub-category</th>
-            <th>Rate</th>
-            <th>Active?</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-            {this.state.rows}
-        </tbody>
-      </table>
+      <ul className="list">
+        {this.state.rows}
+      </ul>
     )
   }
 }
