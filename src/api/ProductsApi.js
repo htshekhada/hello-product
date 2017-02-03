@@ -1,5 +1,6 @@
 class ProductsApi {
 
+  static initialProductsFetched = false;
   static products = [
     {
       "id": 1,
@@ -75,10 +76,28 @@ class ProductsApi {
     return this.categories.filter(category => (category.level === level && category.parent_id === parentIdInt));
   }
 
+  static setProducts(productsParam) {
+    this.products = productsParam;
+  }
+
+  /**
+   * TODO Make this method wait until it assigns products to array.
+   */
   static getAllProducts() {
-    return fetch("products.json").then(response => {
-      return response.json();
-    });
+    if(this.initialProductsFetched) {
+      let products = this.products;
+      //TODO hack
+      return new Promise(function(resolve, reject) {
+        resolve(products);
+      });
+    } else {
+      return fetch("products.json").then(response => {
+        // this.products = response.json()
+        this.initialProductsFetched = true;
+        return response.json();
+      });
+    }
+
 
     //return this.products;
   }

@@ -4,7 +4,8 @@ import { createStore } from 'redux';
 import { combineForms } from 'react-redux-form';
 // import { Form, Control } from 'react-redux-form';
 import productsApi from '../../api/ProductsApi';
-import { browserHistory, router } from 'react-router'
+import { browserHistory, router } from 'react-router';
+import update from 'immutability-helper';
 
 const initialProduct = {
       "id": -1,
@@ -51,7 +52,7 @@ class AddProduct extends React.Component {
         this.setState({ subCategories: subCategories });
         this.setState({ productToEdit: product });
     } else {
-        this.setState({ productToEdit: initialProduct });
+        //this.setState({ productToEdit: initialProduct });
       }
     }
 
@@ -106,15 +107,21 @@ class AddProduct extends React.Component {
   }
 
   handleChange(e) {
-    var newState = {productToEdit:{}};
+    //e.target.value is yes/no instead of true/false in case of checkbox.
     if(e.target.name === "active") {
-      newState.productToEdit[e.target.name] = e.target.checked; 
+      let newObject = update(this.state.productToEdit,
+          {
+            [e.target.name]: {$set: e.target.checked}
+          });
+      this.setState({productToEdit: newObject});
+
     } else {
-      newState.productToEdit[e.target.name] = e.target.value;
+      let newObject = update(this.state.productToEdit,
+          {
+            [e.target.name]: {$set: e.target.value}
+          });
+      this.setState({productToEdit: newObject});
     }
-//    this.state.productToEdit.code=e.target.value;
-    //this.setState({code: e.target.value});
-    this.setState(newState);
   }
 
   render() {
@@ -141,7 +148,7 @@ class AddProduct extends React.Component {
               })
             }
           </select></td></tr>
-          <tr><td><input name="rate" placeholder="Rate" ref="product_rate" /></td></tr>
+          <tr><td><input name="rate" placeholder="Rate" ref="product_rate" value={this.state.productToEdit["rate"]} /></td></tr>
           <tr><td>Active: <input name="active" type="checkbox" checked={this.state.productToEdit.active} onChange={this.handleChange} ref="product_active" /></td></tr>
           <tr><td><button>Save</button></td></tr>
           </tbody>
