@@ -1,11 +1,7 @@
 import React from 'react';
-import { createStore } from 'redux';
-// import { Provider } from 'react-redux';
-import { combineForms } from 'react-redux-form';
-// import { Form, Control } from 'react-redux-form';
 import productsApi from '../../api/ProductsApi';
-import { browserHistory, router } from 'react-router';
 import update from 'immutability-helper';
+import PropTypes from 'prop-types';
 
 const initialProduct = {
       "id": -1,
@@ -20,11 +16,11 @@ const initialProduct = {
 
 class AddProduct extends React.Component {
 
-  static get contextTypes() {
-    return {
-      router: React.PropTypes.object.isRequired,
-    };
-  }
+  // static get contextTypes() {
+  //   return {
+  //     router: PropTypes.object.isRequired,
+  //   };
+  // }
 
   constructor(props) {
     super(props);
@@ -45,8 +41,8 @@ class AddProduct extends React.Component {
   componentDidMount() {
     let categories = productsApi.getCategories(1,0);
     this.setState({ categories: categories });
-    if(this.props.params.productId && this.props.params.productId !== "") {
-        let product = productsApi.getProduct(this.props.params.productId);
+    if(this.props.match.params && this.props.match.params.productId && this.props.match.params.productId !== "") {
+        let product = productsApi.getProduct(this.props.match.params.productId);
         if(product !== null) {
         let subCategories = productsApi.getCategories(2,product.category);
         this.setState({ subCategories: subCategories });
@@ -75,7 +71,7 @@ class AddProduct extends React.Component {
 
     //after successful Add or update Product 
     let newProduct = {
-      "id": this.props.params.productId?this.props.params.productId:-1,
+      "id": (this.props.params && this.props.params.productId)?this.props.params.productId:-1,
       "code": productCodeInput.value,
       "name": productNameInput.value,
       "description": productDescriptionInput.value,
@@ -88,7 +84,9 @@ class AddProduct extends React.Component {
     productsApi.createOrUpdateProduct(newProduct);
     //browserHistory.push('/#/product-list');
     //navigate to product-list
-    this.context.router.push('/product-list');
+    //this.context.router.push('/product-list');
+    //this.context.router.history.push('/product-list')
+    this.props.history.push("/product-list");
     return false;
   }
 
@@ -148,7 +146,7 @@ class AddProduct extends React.Component {
               })
             }
           </select></td></tr>
-          <tr><td><input name="rate" placeholder="Rate" ref="product_rate" value={this.state.productToEdit["rate"]} /></td></tr>
+          <tr><td><input name="rate" placeholder="Rate" ref="product_rate" value={this.state.productToEdit["rate"]} onChange={this.handleChange} /></td></tr>
           <tr><td>Active: <input name="active" type="checkbox" checked={this.state.productToEdit.active} onChange={this.handleChange} ref="product_active" /></td></tr>
           <tr><td><button>Save</button></td></tr>
           </tbody>

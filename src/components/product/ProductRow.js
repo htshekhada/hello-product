@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import productsApi from '../../api/ProductsApi';
 
 class ProductRow extends React.Component {
@@ -23,7 +23,7 @@ class ProductRow extends React.Component {
       <li className="list-item">
         <div className="list-content" alt="hello">
           <h2>{name} - {this.props.product.code}</h2>
-          <img src="http://placehold.it/110x145" alt="cover"/>
+          <img src="http://placehold.it/50x50" alt="cover"/>
           <p>
             {this.props.product.description}<br/>
             Department: {this.getCategoryName(this.props.product.category)} => {this.getCategoryName(this.props.product["sub-category"])}
@@ -37,7 +37,3 @@ class ProductRow extends React.Component {
 }
 
 export default ProductRow;
-
-        // <td>{this.props.product.category}</td>
-        // <td>{this.props.product["sub-category"]}</td>
-// <td>{this.props.product.active?"Yes":"No"}</td>

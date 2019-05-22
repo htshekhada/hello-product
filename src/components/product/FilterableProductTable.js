@@ -14,6 +14,7 @@ class FilterableProductTable extends React.Component {
       products: [],
       productsFiltered: []
     };
+    console.log('222');
   }
 
   componentWillMount() {
@@ -32,17 +33,18 @@ class FilterableProductTable extends React.Component {
 
   handleUserInput(filterText, isActiveOnly) {
     this.setState({
-      filterText: filterText,
+      filterText: filterText.toLowerCase(),
       isActiveOnly: isActiveOnly
     });
 
     let productsFiltered = this.state.products.filter(product => {
-        if(product.name.indexOf(filterText) !== -1 && (product.active || !isActiveOnly)) {
+        if(product.name.toLowerCase().indexOf(filterText) !== -1 && (product.active || !isActiveOnly)) {
             return product;
+        } else {
+            return null;
         }
     });
 
-    // let products = productsApi.getAllProducts();
     this.setState({ productsFiltered: productsFiltered });    
   }
 
